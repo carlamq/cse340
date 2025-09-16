@@ -13,7 +13,7 @@
 }
 body {
   margin: 1rem;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Nunito', sans-serif;
   background: var(--background-color);
   color: var(--primary-color);
 }

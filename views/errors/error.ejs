@@ -1,0 +1,23 @@
+<div class="error-page">
+  <div class="error-content">
+    <% if (title) { %>
+      <h1 class="error-title"><%= title %></h1>
+    <% } %>
+
+    <h2 class="error-subtitle">Nothing to see here. Go back to home</h2>
+    
+    <p class="error-message">
+      Even the mightiest samurai sometimes takes a wrong path...
+    </p>
+
+    <% if (message) { %>
+      <div class="error-details">
+        ⚔️ Error Details: <%- message %>
+      </div>
+    <% } %>
+
+    <a href="/" class="home-button">
+      🏠 Return to Home
+    </a>
+  </div>
+</div>

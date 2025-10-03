@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const utilities = require("./utilities/")
 const baseController = require("./controllers/baseController")
+const inventoryRoute = require("./routes/inventoryRoute")
 
 /* ***********************
  * View Engine and Templates
@@ -27,9 +28,11 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************////Notice that instead of router.use, it is now app.use, meaning that the application itself will use this resource.
 app.use(static)
-//index route
-app.get("/", utilities.handleErrors(baseController.buildHome))//utilities.handleErrors wraper handle 2 errors
-//baseController.buildHome function with the logic of home
+// Index route
+app.get("/", utilities.handleErrors(baseController.buildHome))
+
+// Inventory routes
+app.use("/inv", inventoryRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

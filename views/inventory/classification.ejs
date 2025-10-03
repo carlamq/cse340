@@ -1,0 +1,12 @@
+<!-- Content Heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!-- Message Display Section -->
+<%# messages() %>
+
+<!-- Inventory Items Display This code block is the main content delivery mechanism for the view. -->
+<%- grid %>

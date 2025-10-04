@@ -1,12 +1,6 @@
 
-/* 📚 NOTES - ARCHIVO CLAVE DE UTILITIES 
-   ==============================================
-   Este archivo contiene funciones de utilidad que se reusan en toda la app:
-   1. getNav() - Genera navegación dinámica desde base de datos
-   2. buildClassificationGrid() - Convierte datos en HTML para mostrar vehículos  
-   3. handleErrors() - Wrapper para manejo de errores
-   
-   FLUJO: Controller llama estas funciones → Procesan datos → Devuelven HTML listo
+/* Utilities file for inventory functions
+   Contains helper functions for navigation, grids, and error handling
    ============================================== */
 
 const invModel = require("../models/inventory-model")
@@ -14,8 +8,6 @@ const Util = {}
 
 /* ************************
  * Constructs the nav HTML unordered list
- * 📚 NOTES - IMPORTANTE: Esta función se conecta a la BD para generar navegación dinámica
- * FLUJO: BD → getClassifications() → forEach → HTML string → return
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
@@ -39,9 +31,6 @@ Util.getNav = async function (req, res, next) {
 
 /* **************************************
 * Build the classification view HTML
-* 📚 NOTES - IMPORTANTE: Convierte array de vehículos en HTML grid
-* FLUJO: data array → forEach → construye <li> por cada vehículo → return HTML
-* USADO EN: invController.buildByClassificationId()
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
   let grid

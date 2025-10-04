@@ -1,20 +1,10 @@
-/* 📚NOTES - MODELO DE INVENTARIO (CAPA DE DATOS)
-   ====================================================
-   Este archivo contiene todas las funciones que hablan con la base de datos:
-   1. getClassifications() - Para navegación
-   2. getInventoryByClassificationId() - Vehículos por tipo (Sport, SUV, etc.)
-   3. getInventoryByInvId() - Detalles de un vehículo específico
-   
-   IMPORTANTE: Aquí es donde se pueded introducir errores de SQL para debugging
-   ==================================================== */
+// Inventory model - database functions
+// Contains functions for getting vehicle and classification data
 
 const pool = require("../database/")
 
 /* ***************************
- *  📚 NOTES 
  *  Get all classification data
- *  USADO PARA: Generar navegación dinámica (Custom, Sport, SUV, etc.)
- *  FLUJO: pool.query → BD → return resultset
  * ************************** */
 async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")

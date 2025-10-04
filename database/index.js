@@ -1,13 +1,5 @@
-/* 📚 NOTES!! - CONEXIÓN A BASE DE DATOS 
-   ==========================================
-   Este archivo maneja la conexión a PostgreSQL en Render.com:
-   - Pool de conexiones para múltiples usuarios
-   - SSL para seguridad en desarrollo  
-   - Logging de queries para debugging
-   - Manejo de errores
-   
-   IMPORTANTE: En desarrollo usa logging, en producción no
-   ========================================== */
+// Database connection setup
+// Configures PostgreSQL connection pool with SSL
 
 const { Pool } = require("pg") //imports the "Pool" functionality from the "pg" package. A pool is a collection of connection objects (10 is the default number) that allow multiple site visitors to be interacting with the database at any given time. This keeps you from having to create a separate connection for each interaction.
 require("dotenv").config()//imports the "dotenv" package which allows the sensitive information about the database location and connection credentials to be stored in a separate location and still be accessed.

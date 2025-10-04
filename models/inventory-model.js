@@ -32,7 +32,7 @@ async function getInventoryByClassificationId(classification_id) {
       WHERE i.classification_id = $1`,
       [classification_id]
     )
-    return data
+    return data.rows
   } catch (error) {
     console.error("getInventoryByClassificationId error " + error)
   }

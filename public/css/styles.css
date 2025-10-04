@@ -48,6 +48,7 @@ nav ul {
   list-style: none;
   padding: 1rem 0;
   font-weight: bold;
+  color: var(--background-color);
 }
 nav ul li {
   cursor: pointer;

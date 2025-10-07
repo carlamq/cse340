@@ -9,10 +9,10 @@
     </ul>
 <% } %>
 
-    <form action="/inv/add-classification" method="post" class="inventory-form">
-        <label for="classification_name">Classification Name:</label>
-        <p>Classification name must not contain spaces or special characters.</p>
-        <input type="text" name="classification_name" id="classification_name" required pattern="^[a-zA-Z0-9]+$"
-            title="No spaces or special characters allowed" value="<%= locals.classification_name %>">
-        <button type="submit">Add Classification</button>
-    </form>
+<form action="/inv/add-classification" method="post" class="inventory-form">
+    <label for="classification_name">Classification Name:</label>
+    <p>Classification name must not contain spaces or special characters.</p>
+    <input type="text" name="classification_name" id="classification_name" required pattern="^[a-zA-Z0-9]+$"
+        title="No spaces or special characters allowed" value="<%= locals.classification_name %>">
+    <button type="submit">Add Classification</button>
+</form>

@@ -5,6 +5,9 @@ const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/")
 const regValidate = require('../utilities/account-validation')
 
+// Route to build account management view (default route)
+router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
+
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
@@ -24,7 +27,10 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  utilities.handleErrors(accountController.loginAccount)
+  utilities.handleErrors(accountController.accountLogin)
 )
+
+// Process the logout request
+router.get("/logout", utilities.handleErrors(accountController.accountLogout))
 
 module.exports = router;

@@ -1,0 +1,19 @@
+<h1><%= title %></h1>
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+<% errors.array().forEach(error=> { %>
+    <li><%= error.msg %></li>
+<% }) %>
+    </ul>
+<% } %>
+
+<div class="account-management">
+    <p>You're logged in</p>
+    
+    <h2>Account Management</h2>
+    <p>Welcome to your account management area. Here you can manage your account settings and preferences.</p>
+    
+    <!-- Future account management features will go here -->
+</div>

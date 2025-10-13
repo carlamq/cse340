@@ -30,7 +30,14 @@ function buildInventoryList(data) {
  dataTable += '<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
  dataTable += '</thead>'; 
  // Set up the table body 
- dataTable += '<tbody>'; 
+    dataTable += '<tbody>'; 
+    // Check if there are no vehicles in this classification
+if (data.length === 0) {
+  dataTable += '<tr><td colspan="3">No vehicles found for this classification.</td></tr>';
+  dataTable += '</tbody>';
+  inventoryDisplay.innerHTML = dataTable;
+  return;
+}
  // Iterate over all vehicles in the array and put each in a row 
  data.forEach(function (element) { 
   console.log(element.inv_id + ", " + element.inv_model); 
@@ -38,6 +45,7 @@ function buildInventoryList(data) {
   dataTable += `<td><a href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
   dataTable += `<td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`; 
  }) 
+
  dataTable += '</tbody>'; 
  // Display the contents in the Inventory Management view 
  inventoryDisplay.innerHTML = dataTable; 

@@ -242,4 +242,21 @@ async function changePassword(req, res, next) {
   }
 }
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildAccountUpdate, updateAccount, changePassword }
+/* ****************************************
+ * Show User Orders
+ **************************************** */
+async function showUserOrders(req, res, next) {
+  let nav = await utilities.getNav()
+  const orderModel = require("../models/order-model")
+  const account_id = res.locals.accountData.account_id
+  const orders = await orderModel.getOrdersByAccount(account_id)
+  
+  res.render("purchase/user-orders", {
+    title: "My Orders",
+    nav,
+    orders,
+    errors: null
+  })
+}
+
+module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildAccountUpdate, updateAccount, changePassword, showUserOrders }

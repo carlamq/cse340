@@ -32,4 +32,8 @@ router.post("/update", accountValidate.updateAccountRules(), accountValidate.che
 // Route to process password change
 router.post("/change-password", accountValidate.changePasswordRules(), accountValidate.checkPasswordData, utilities.handleErrors(accountController.changePassword))
 
+// Route to show user orders (alternative route)
+router.get("/orders", utilities.checkLogin, utilities.handleErrors(accountController.showUserOrders))
+
+
 module.exports = router;

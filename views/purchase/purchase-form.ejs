@@ -1,0 +1,32 @@
+<h1><%= title %></h1>
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error=> { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+<!-- Vehicle Info Summary -->
+<div class="vehicle-summary">
+    <h2>Vehicle Details</h2>
+    <div class="vehicle-info">
+        <p><strong>Vehicle:</strong><%= vehicleData.inv_make %><%= vehicleData.inv_model %> (<%= vehicleData.inv_year %>)</p>
+        <p><strong>Color:</strong><%= vehicleData.inv_color %></p>
+        <p><strong>Price:</strong> $<%= new Intl.NumberFormat('en-US').format(vehicleData.inv_price) %></p>
+    </div>
+</div>
+<!-- Purchase Form -->
+<form action="/purchase/confirm" method="post" class="login-form">
+    <h3>Delivery Information</h3>
+    <label for="delivery_address">Delivery Address:</label>
+    <textarea name="delivery_address" id="delivery_address" required
+        placeholder="Enter your complete delivery address including city, state, and zip code"
+        rows="4"></textarea>
+    <input type="hidden" name="inv_id" value="<%= vehicleData.inv_id %>">
+    <button type="submit">Complete Purchase</button>
+</form>
+<div class="purchase-note">
+    <p><strong>Note:</strong> After completing your purchase, our team will contact you within 24 hours to arrange delivery and payment details.</p>
+</div>

@@ -90,8 +90,8 @@ Util.buildClassificationList = async function (classification_id = null) {
 * ************************************ */
 Util.buildDetailGrid = async function(data){
   let grid
-  if(data.rows.length > 0){
-    let vehicle = data.rows[0]
+  if(data && data.inv_id){
+    let vehicle = data
     grid = '<div class="vehicle-detail">'
     grid += '<div class="vehicle-image">'
     grid += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + '">'

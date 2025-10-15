@@ -259,4 +259,78 @@ async function showUserOrders(req, res, next) {
   })
 }
 
-module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildAccountUpdate, updateAccount, changePassword, showUserOrders }
+/* ****************************************
+ * Show Purchase Form
+ **************************************** */
+async function showPurchaseForm(req, res, next) {
+  let nav = await utilities.getNav()
+  const invModel = require("../models/inventory-model")
+  const inv_id = parseInt(req.params.inv_id)
+  
+  const vehicleData = await invModel.getInventoryByInvId(inv_id)
+  
+  if (!vehicleData) {
+    req.flash("notice", "Vehicle not found.")
+    res.redirect("/")
+    return
+  }
+
+  const vehicleName = `${vehicleData.inv_make} ${vehicleData.inv_model}`
+  
+  res.render("purchase/purchase-form", {
+    title: `Purchase ${vehicleName}`,
+    nav,
+    vehicleData,
+    errors: null
+  })
+}
+
+/* ****************************************
+ * Process Purchase
+ **************************************** */
+async function processPurchase(req, res, next) {
+  let nav = await utilities.getNav()
+  const invModel = require("../models/inventory-model")
+  const orderModel = require("../models/order-model")
+  const { inv_id, delivery_address } = req.body
+  const account_id = res.locals.accountData.account_id
+
+  //get vehicle info for price
+  const vehicleData = await invModel.getInventoryByInvId(inv_id)
+  
+  if (!vehicleData) {
+    req.flash("notice", "Vehicle not found.")
+    res.redirect("/")
+    return
+  }
+
+  // Create the order
+  const orderResult = await orderModel.createOrder(
+    account_id,
+    inv_id,
+    delivery_address,
+    vehicleData.inv_price
+  )
+
+  if (orderResult && orderResult.rows) {
+    req.flash("success", "Your order has been placed successfully! We will contact you soon.")
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, there was an error processing your order.")
+    res.redirect(`/account/purchase/${inv_id}`)
+  }
+}
+
+/* ****************************************
+ * Show Purchase Success
+ **************************************** */
+async function showPurchaseSuccess(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("purchase/succes", {
+    title: "Purchase Successful",
+    nav,
+    errors: null
+  })
+}
+
+module.exports = { buildLogin, buildRegistration, registerAccount, accountLogin, buildAccountManagement, accountLogout, buildAccountUpdate, updateAccount, changePassword, showUserOrders, showPurchaseForm, processPurchase, showPurchaseSuccess }

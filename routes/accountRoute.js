@@ -35,5 +35,13 @@ router.post("/change-password", accountValidate.changePasswordRules(), accountVa
 // Route to show user orders (alternative route)
 router.get("/orders", utilities.checkLogin, utilities.handleErrors(accountController.showUserOrders))
 
+// Route to show purchase form
+router.get("/purchase/:inv_id", utilities.checkLogin, utilities.handleErrors(accountController.showPurchaseForm))
+
+// Route to process purchase
+router.post("/purchase/confirm", utilities.checkLogin, utilities.handleErrors(accountController.processPurchase))
+
+// Route to show purchase success
+router.get("/purchase/success", utilities.checkLogin, utilities.handleErrors(accountController.showPurchaseSuccess))
 
 module.exports = router;

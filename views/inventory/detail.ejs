@@ -11,7 +11,7 @@
 <!-- Buy Now Section (only for logged in clients) -->
 <% if (locals.loggedin && locals.accountData.account_type== "Client") { %>
     <div class="purchase-section">
-        <a href="/purchase/<%= locals.vehicle_id %>" class="buy-now-btn">Buy This Car Now!</a>
+        <a href="/account/purchase/<%= locals.vehicle_id %>" class="buy-now-btn">Buy This Car Now!</a>
         <p class="purchase-note">Complete your purchase and we'll contact you with delivery details.</p>
     </div>
 <% } else if (!locals.loggedin) { %>
